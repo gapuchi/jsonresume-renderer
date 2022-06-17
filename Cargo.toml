@@ -1,6 +1,6 @@
 [package]
 name = "jsonresume-renderer"
-version = "0.2.0"
+version = "0.3.0"
 authors = ["gapuchi <arjun.adhia@gmail.com>"]
 description = "Generates a file from a JSON Resume and a template."
 edition = "2021"
@@ -9,6 +9,7 @@ license = "MIT"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+clap = { version = "3.2.5", features = ["derive"] }
 log = "0.4.14"
 simple_logger = "1.13.0"
 serde = { version = "1.0", features = ["derive"] }
