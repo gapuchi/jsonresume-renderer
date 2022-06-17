@@ -81,24 +81,18 @@ fn main() -> Result<(), io::Error> {
     SimpleLogger::new().init().unwrap();
 
     let args: Vec<String> = env::args().collect();
-    let filename = &args[1];
-    let output_filename = &args[2];
+    let json_resume_filename = &args[1];
+    let template_filename = &args[2];
+    let output_filename = &args[3];
 
-    info!("Reading ResumeJson file: {}", filename);
-    let file = File::open(filename)?;
-    let resume: JsonResume = serde_json::from_reader(file)?;
-    
-    let template_name = "resume.tex";
-    let mut tera = Tera::default();
+    info!("Reading ResumeJson file: {}", json_resume_filename);
+    let json_resume_file = File::open(json_resume_filename)?;
+    let resume: JsonResume = serde_json::from_reader(json_resume_file)?;
 
-    match tera.add_raw_template(template_name, include_str!("templates/resume.template")) {
-        Err(e) => {
-            error!("Error adding template: {}", e);
-            std::process::exit(1);
-        }
-        _ => {}
-    };
+    info!("Reading template file: {}", template_filename);
+    let template = fs::read_to_string(template_filename)?;
 
+    info!("Generating Tera Context");
     let context = match Context::from_serialize(&resume) {
         Ok(value) => value,
         Err(e) => {
@@ -107,7 +101,7 @@ fn main() -> Result<(), io::Error> {
         }
     };
 
-    let rendered = match tera.render(template_name, &context) {
+    let rendered = match Tera::one_off(&template, &context, false) {
         Ok(x) => x,
         Err(e) => {
             error!("Error rendering: {}", e);
@@ -115,11 +109,7 @@ fn main() -> Result<(), io::Error> {
         }
     };
 
-    match fs::write(output_filename, rendered) {
-        Err(e) => {
-            error!("Error writing: {}", e);
-            std::process::exit(1);
-        }
-        _ => Ok(())
-    }
+    fs::write(output_filename, rendered)?;
+
+    Ok(())
 }
