@@ -5,9 +5,10 @@ This is a binary that takes in a JSON following the [JSON Resume schema](https:/
 This is WIP. Couple of things needed before general usage:
 
 - [x] Be able to take in any template. Currently, my template to generate a LaTex file is hardcoded.
-- [ ] Include all fields of JSON Resume Schema. Currently, it only takes in the fields needed for the above template.
+- [ ] Include all fields of JSON Resume Schema. Currently, it only takes in a subset of the fields.
 - [ ] Make args CLI-like.
 - [ ] Add template directory support, as opposed to a one-off template.
+- [ ] Better error messaging.
 
 #### Sample Usage
 
