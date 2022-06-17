@@ -1,5 +1,5 @@
 pub mod schema {
-
+    use chrono::NaiveDate;
     use serde::{Deserialize, Serialize};
 
     #[derive(Debug, Serialize, Deserialize)]
@@ -40,8 +40,8 @@ pub mod schema {
     struct Work {
         name: Option<String>,
         position: Option<String>,
-        start_date: Option<String>,
-        end_date: Option<String>,
+        start_date: Option<NaiveDate>,
+        end_date: Option<NaiveDate>,
         summary: Option<String>,
         highlights: Vec<String>,
     }
@@ -53,8 +53,8 @@ pub mod schema {
         url: Option<String>,
         area: Option<String>,
         study_type: Option<String>,
-        start_date: Option<String>,
-        end_date: Option<String>,
+        start_date: Option<NaiveDate>,
+        end_date: Option<NaiveDate>,
         score: Option<String>,
     }
 
