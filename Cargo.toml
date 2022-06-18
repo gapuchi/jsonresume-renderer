@@ -1,6 +1,6 @@
 [package]
 name = "jsonresume-renderer"
-version = "0.4.0"
+version = "0.5.0"
 authors = ["gapuchi <arjun.adhia@gmail.com>"]
 description = "Generates a file from a JSON Resume and a template."
 edition = "2021"
