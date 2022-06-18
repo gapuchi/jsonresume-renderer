@@ -12,6 +12,8 @@ This is WIP. Couple of things needed before general usage:
 
 #### Getting Started
 
+`jsonresume-renderer` is available via [Cargo](https://crates.io/crates/jsonresume-renderer):
+
 ```bash
 $ cargo install jsonresume-renderer
 $ jsonresume-renderer --help
